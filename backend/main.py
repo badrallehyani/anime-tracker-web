@@ -3,7 +3,7 @@ from app import flask_app, tracker
 
 
 def run_flask():
-    HOST = '10.0.0.2'
+    HOST = 'localhost'
     PORT = '8080'
     flask_app.run(host = HOST, port = PORT, debug = False)
 
