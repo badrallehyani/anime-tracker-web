@@ -36,8 +36,17 @@ a{
 }
 
 /* Edit.js */
+.anime-name-and-submitter{
+  width: 40%;  
+}
+.anime-submitter{
+  font-weight: bold;
+
+  text-decoration: none;
+  color: black;
+}
+
 .anime-name{
-  width: 40%;
   cursor: pointer;
 }
 .anime-completed{

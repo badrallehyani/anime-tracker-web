@@ -35,6 +35,10 @@ function Edit() {
         fetchAnimeFunction() // to refresh immedietly after a remove
     }
 
+    const getSubmitterURL = (submitterName) =>{
+        return `https://nyaa.si/user/${submitterName}`
+    }
+
     useEffect(() => {
         fetchAnimeFunction()
 
@@ -71,12 +75,36 @@ function Edit() {
                 animeList.map((anime) => {
                     return (
                         <div className="anime-container" key={anime.name}>
-                            <div className="anime-name" title="Click To Show Keyword" onClick={
-                                () => {
-                                    alert(anime.keyword)
-                                }
-                            }>{anime.name}</div>
+
+
+                            <div className="anime-name-and-submitter" >
+
+                                <a
+                                    className="anime-submitter"
+                                    href={getSubmitterURL(anime.submitter)}
+                                    target="_blank"
+                                >
+                                    [{anime.submitter}]
+                                </a>
+
+
+                                <div 
+                                    className="anime-name" 
+                                    onClick={() => {
+                                        var msg = `Keyword: ${anime.keyword}`
+                                        alert(msg)
+                                    }}
+                                    title="Click To Show Keyword"
+                                >
+                                    {anime.name}
+                                </div>
+                                
+                            </div>
+
+
                             <div className="anime-path" title="Path">{anime.path}</div>
+
+
                             <div className="anime-delete-button-container">
                                 <button onClick={
                                     () => {
@@ -84,6 +112,8 @@ function Edit() {
                                     }
                                 } className="anime-delete-button">x</button>
                             </div>
+
+
                         </div>
                     )
                 })
