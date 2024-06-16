@@ -47,12 +47,13 @@ def create_main_routes_bp(t: Tracker):
 
         name = data.get('name')
         keyword = data.get('keyword')
+        submitter = data.get('submitter')
         path = data.get('path')
 
-        if not all([name, keyword, path]):
-            return "missing data (should be: name, keyword, path)"
+        if not all([name, keyword, path, submitter]):
+            return "missing data (should be: name, keyword, submitter, path)"
 
-        return json.dumps(t.add_anime(name, keyword, path))
+        return json.dumps(t.add_anime(name, keyword, submitter, path))
 
     @main_routes_bp.route('/remove_anime', methods = ['POST'])
     def remove_anime():
