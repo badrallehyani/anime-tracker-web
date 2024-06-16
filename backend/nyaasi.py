@@ -85,6 +85,12 @@ class Nyaasi:
 
         response = get(searchURL)
         return Nyaasi.parseSearchResponse(response)
+    
+    def searchByUser(keyword: str, user: str):
+        searchURL = Nyaasi.baseURL + "/user/" + user + "?q=" + keyword
+
+        response = get(searchURL)
+        return Nyaasi.parseSearchResponse(response)
 
     def parseSearchResponse(response: Response):
         response_soup = soup(response.text, "html.parser")
