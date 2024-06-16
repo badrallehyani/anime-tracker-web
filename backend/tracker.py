@@ -73,7 +73,7 @@ class Tracker:
 
     # DATA.JSON
 
-    def add_anime(self, name, keyword, path) -> dict:
+    def add_anime(self, name, keyword, submitter, path) -> dict:
         # returns the new data
         
         data = self.get_data()
@@ -82,6 +82,7 @@ class Tracker:
         new_anime_list.append({
             "name": name,
             "keyword": keyword,
+            "submitter": submitter,
             "done": [],
             "path": path
         })
@@ -118,10 +119,11 @@ class Tracker:
         for anime in anime_list:
             name = anime.get("name")
             keyword = anime.get("keyword")
+            submitter = anime.get("submitter")
             done = anime.get("done")
             path = anime.get("path")
 
-            search_result = Nyaasi.search(keyword)
+            search_result = Nyaasi.searchByUser(keyword, submitter)
             missing = [ i for i in search_result if i.get('URL') not in done ]
             missing_urls = [i.get('URL') for i in missing]
             missing_torrent_urls = [i.get('links').get('torrent_file') for i in missing]
