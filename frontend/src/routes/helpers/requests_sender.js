@@ -20,13 +20,14 @@ async function getRecent(){
     return recentFiles
 }
 
-async function addAnime(name, keyword, path){
+async function addAnime(name, keyword, submitter, path){
     const response = await fetch(BASE_URL + "add_anime", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
             name: name,
             keyword: keyword,
+            submitter: submitter,
             path: path
         })
     })
