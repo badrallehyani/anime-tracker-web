@@ -46,27 +46,28 @@ a{
   color: black;
 }
 
-.anime-name{
+/* .anime-name{
   cursor: pointer;
-}
+} */
 .anime-completed{
   width: 20%
 }
 .anime-path{
+  white-space: nowrap;
   width: 30%;
+  overflow-x: hidden;
+  overflow-wrap: break-word;
+  
+  cursor: pointer;
+}
+.anime-path::-webkit-scrollbar {
+  display: none;
 }
 .anime-delete-button-container{
   width: 10%;
 }
 .anime-delete-button{
   width: 50%;
-}
-
-.anime-path{
-  overflow-x: scroll;
-}
-.anime-path::-webkit-scrollbar {
-  display: none;
 }
 
 /* recent & Edit */

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import EmptyFiles from './helpers_components/EmptyFiles'
 import LoadingFiles from "./helpers_components/LoadingFiles";
+import AnimeRow from "./custom_components/AnimeRow";
 
 const reqSender = require("./helpers/requests_sender")
 
@@ -27,16 +28,6 @@ function Edit() {
 
         setLoading(false)
         requestLoading = false
-    }
-
-    const removeAnime = async (name) => {
-        const response = await reqSender.removeAnime(name)
-        alert(JSON.stringify(response))
-        fetchAnimeFunction() // to refresh immedietly after a remove
-    }
-
-    const getSubmitterURL = (submitterName) =>{
-        return `https://nyaa.si/user/${submitterName}`
     }
 
     useEffect(() => {
@@ -73,49 +64,14 @@ function Edit() {
         <div className="all-animes-container">
             {
                 animeList.map((anime) => {
-                    return (
-                        <div className="anime-container" key={anime.name}>
-
-
-                            <div className="anime-name-and-submitter" >
-
-                                <a
-                                    className="anime-submitter"
-                                    href={getSubmitterURL(anime.submitter)}
-                                    target="_blank"
-                                >
-                                    [{anime.submitter}]
-                                </a>
-
-
-                                <div 
-                                    className="anime-name" 
-                                    onClick={() => {
-                                        var msg = `Keyword: ${anime.keyword}`
-                                        alert(msg)
-                                    }}
-                                    title="Click To Show Keyword"
-                                >
-                                    {anime.name}
-                                </div>
-                                
-                            </div>
-
-
-                            <div className="anime-path" title="Path">{anime.path}</div>
-
-
-                            <div className="anime-delete-button-container">
-                                <button onClick={
-                                    () => {
-                                        removeAnime(anime.name)
-                                    }
-                                } className="anime-delete-button">x</button>
-                            </div>
-
-
-                        </div>
-                    )
+                    return <AnimeRow 
+                        anime={anime}
+                        fetchAnimeFunction = {fetchAnimeFunction}
+                        removeAnime = {async (name)=>{
+                            const response = await reqSender.removeAnime(name)
+                            alert(JSON.stringify(response))
+                        }}
+                    />
                 })
             }
 
