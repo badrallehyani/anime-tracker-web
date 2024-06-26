@@ -17,6 +17,7 @@ import Edit from './routes/Edit';
 import Recent from './routes/Recent';
 import Add from './routes/Add';
 import NextRefresh from './routes/NextRefresh';
+import LogsRouter from './routes/LogsRouter';
 
 function App() {
     const navLinks = [
@@ -39,6 +40,11 @@ function App() {
             name: "Next Refresh",
             href: "/next_refresh",
             component: NextRefresh
+        },
+        {
+            name: "Logs",
+            href: "/logs",
+            component: LogsRouter
         }
     ]
 

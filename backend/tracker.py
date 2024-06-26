@@ -1,6 +1,6 @@
 import os, json, time
 
-import logging
+import logging, traceback
 log_file_name = os.path.join( os.path.dirname(__file__), 'log.log' )
 logging.basicConfig(filename=log_file_name, format='%(asctime)s - %(message)s', level=logging.INFO)
 
@@ -23,6 +23,7 @@ class Tracker:
         self.sleep_between_updates = sleep_between_updates
 
         self.last_update = -1
+        self.next_update = -1
 
 
     def get_updates_info(self):
@@ -123,7 +124,12 @@ class Tracker:
             done = anime.get("done")
             path = anime.get("path")
 
-            search_result = Nyaasi.searchByUser(keyword, submitter)
+            try:
+                search_result = Nyaasi.searchByUser(keyword, submitter)
+            except:
+                logging.info(traceback.format_exc())
+                return traceback.format_exc()
+            
             missing = [ i for i in search_result if i.get('URL') not in done ]
             missing_urls = [i.get('URL') for i in missing]
             missing_torrent_urls = [i.get('links').get('torrent_file') for i in missing]
@@ -132,7 +138,12 @@ class Tracker:
                 newly_added += missing
                 data_has_changed = True
                 
-                self.send_to_downloader(missing_torrent_urls, path)
+                try:
+                    self.send_to_downloader(missing_torrent_urls, path)
+                except:
+                    logging.info(traceback.format_exc())
+                    return traceback.format_exc()
+
                 self.add_to_recent(missing)
                 
                 anime.update({"done": done + missing_urls})

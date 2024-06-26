@@ -79,6 +79,15 @@ async function clearRecent(){
     return responseJSON
 }
 
+async function getLogs(){
+    const response = await fetch(BASE_URL + "get_logs", {
+        method: "GET"
+    })
+    const responseText = await response.text()
+
+    return responseText
+}
+
 const reqSender = {
     getAnimes: getAnimes,
     getRecent: getRecent,
@@ -86,7 +95,8 @@ const reqSender = {
     removeAnime: removeAnime,
     refresh: refresh,
     getUpdatesInfo: getUpdatesInfo,
-    clearRecent: clearRecent
+    clearRecent: clearRecent,
+    getLogs: getLogs
 }
 
 

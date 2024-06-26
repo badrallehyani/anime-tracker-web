@@ -3,7 +3,7 @@ import json
 import flask_cors
 from flask import Blueprint, request, jsonify, make_response
 
-from tracker import Tracker
+from tracker import Tracker, log_file_name
 
 
 def create_main_routes_bp(t: Tracker):
@@ -11,6 +11,12 @@ def create_main_routes_bp(t: Tracker):
     main_routes_bp = Blueprint('main_routes_bp', __name__)
 
     # GET
+    @main_routes_bp.route('/get_logs', methods = ['GET'])
+    def get_logs():
+        return open(log_file_name, 'r').read()
+    
+
+    
     @main_routes_bp.route('/get_updates_info', methods = ['GET'])
     def get_updates_info():
         return t.get_updates_info()
