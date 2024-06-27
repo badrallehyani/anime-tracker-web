@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:8080/"
+const BASE_URL = require("../../config/config").backendBaseURL
 
 async function getAnimes(){
     const response = await fetch(BASE_URL + "get_animes", {

@@ -1,10 +1,10 @@
+import json
 from threading import Thread
-from app import flask_app, tracker
-
+from app import flask_app, tracker, conf
 
 def run_flask():
-    HOST = 'localhost'
-    PORT = '8080'
+    HOST = conf.get("python_server_host")
+    PORT = conf.get("python_server_port")
     flask_app.run(host = HOST, port = PORT, debug = False)
 
 def run_tracker():
