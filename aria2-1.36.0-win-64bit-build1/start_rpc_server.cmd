@@ -1,1 +1,1 @@
-aria2c.exe --enable-rpc
+aria2c.exe --enable-rpc --rpc-listen-all=true
