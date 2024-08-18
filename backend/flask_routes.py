@@ -36,6 +36,11 @@ def create_main_routes_bp(t: Tracker):
     
 
     # POST
+    @main_routes_bp.route('/clear_logs', methods = ['POST'])
+    def clear_logs():
+        open(log_file_name, 'w').write("")
+        return "Ok"
+
     @main_routes_bp.route('/refresh', methods = ['POST'])
     def refresh():
         return t.check_and_download()

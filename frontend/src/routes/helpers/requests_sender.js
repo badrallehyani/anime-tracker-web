@@ -88,6 +88,15 @@ async function getLogs(){
     return responseText
 }
 
+async function clearLogs(){
+    const response = await fetch(BASE_URL + "clear_logs", {
+        method: "POST"
+    })
+    const responseText = await response.text()
+
+    return responseText 
+}
+
 const reqSender = {
     getAnimes: getAnimes,
     getRecent: getRecent,
@@ -96,7 +105,8 @@ const reqSender = {
     refresh: refresh,
     getUpdatesInfo: getUpdatesInfo,
     clearRecent: clearRecent,
-    getLogs: getLogs
+    getLogs: getLogs,
+    clearLogs: clearLogs,
 }
 
 

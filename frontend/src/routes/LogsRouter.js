@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
 
 const reqSender = require("./helpers/requests_sender")
 
@@ -15,6 +14,10 @@ function LogsRouter() {
         const fetchedLogs = await reqSender.getLogs()
         setLogs(fetchedLogs)
     }
+    const clearLogs = async () => {
+        alert(await reqSender.clearLogs())
+        updateLogs()
+    }
 
     useEffect(() => {
         updateLogs()
@@ -22,7 +25,16 @@ function LogsRouter() {
 
     return (
         <div>
-            <button onClick={jumpToBottom}>Jump To Buttom</button>
+            <button 
+            onClick={jumpToBottom} 
+            style={{marginRight: "15px"}}>
+                Jump To Buttom
+            </button>
+
+            <button
+            onClick={clearLogs}>Clear</button>
+
+            
             <div style={{ whiteSpace: "pre-line" }}>
                 {logs ? logs : "Loading Logs"}
             </div>
